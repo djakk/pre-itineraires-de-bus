@@ -1,6 +1,6 @@
 {
   "name" : "Itineraires-de-bus", 
   "dependencies": {
-      "mapnik": "git://github.com/springmeyer/node-mapnik-heroku.git#unicode-and-projections"
+      "mapnik": "git://github.com/mapnik/node-mapnik.git"
   }
 }
