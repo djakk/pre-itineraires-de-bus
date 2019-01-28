@@ -7,7 +7,7 @@ mapnik.register_default_input_plugins();
 
 // https://github.com/bensheldon/mapnik-on-heroku <- thanks !
 var port = process.env.PORT || 3000;
-var stylesheet = './examples/stylesheet.xml';
+var stylesheet = './stylesheet.xml';
 
 http.createServer(function(req, res) {
   res.writeHead(500, {'Content-Type': 'text/plain'});
