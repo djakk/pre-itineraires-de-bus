@@ -1,5 +1,5 @@
 var mapnik = require('mapnik');
-var fs = require('fs');
+var http = require('http');
 
 // register fonts and datasource plugins
 mapnik.register_default_fonts();
