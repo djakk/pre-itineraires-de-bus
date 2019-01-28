@@ -1,3 +1,4 @@
 {
-  "name" : "Itinéraires de bus"
+  "name" : "Itinéraires de bus", 
+  "dependencies"  : { "mapnik":"4.2.1" } 
 }
