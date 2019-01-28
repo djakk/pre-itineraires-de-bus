@@ -5,8 +5,6 @@ var http = require('http');
 mapnik.register_default_fonts();
 mapnik.register_default_input_plugins();
 
-var map = new mapnik.Map(256, 256);
-
 // https://github.com/bensheldon/mapnik-on-heroku <- thanks !
 var port = process.env.PORT || 3000;
 var stylesheet = './examples/stylesheet.xml';
