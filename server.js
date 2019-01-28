@@ -1,4 +1,4 @@
-var mapnik = require('mapnik');
+var mapnik = require('/app/node_modules/mapnik/lib/binding/mapnik.node');
 var http = require('http');
 
 // register fonts and datasource plugins
