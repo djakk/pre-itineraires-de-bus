@@ -1,3 +1,3 @@
-worker: npm install mapnik
+release: npm install mapnik
 
 web: node server.js
