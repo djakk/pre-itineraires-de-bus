@@ -1,6 +1,6 @@
 var mapnik = require('mapnik');
 var http = require('http');
-var queryOverpass = require('queryOverpass');
+var queryOverpass = require('query-overpass');
 
 // register fonts and datasource plugins
 mapnik.register_default_fonts();
