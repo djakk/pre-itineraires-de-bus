@@ -18,7 +18,7 @@ http.createServer(function(req, res) {
       res.end(err.message);
     } else {
       //console.log(geojson);
-      var map = new mapnik.Map(srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
+      var map = new mapnik.Map(256, 256, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
       var options = {
         type: 'geojson',
         inline: geojson
@@ -31,7 +31,7 @@ http.createServer(function(req, res) {
       
       map.zoomAll();
       var the_image__for_the_map = new mapnik.Image(256, 256);
-      map.render(im, function(err,im) {
+      map.render(the_image__for_the_map, function(err,im) {
         if (err) {
           res.end(err.message);
         } else {
