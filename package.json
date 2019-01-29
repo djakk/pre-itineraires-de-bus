@@ -1,6 +1,7 @@
 {
   "name" : "Itineraires-de-bus", 
   "dependencies": {
-      "mapnik": "git://github.com/mapnik/node-mapnik.git"
+      "mapnik": "git://github.com/mapnik/node-mapnik.git", 
+      "query-overpass" : "git://github.com/perliedman/query-overpass.git"
   }
 }
