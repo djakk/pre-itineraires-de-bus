@@ -17,7 +17,8 @@ http.createServer(function(req, res) {
     if (err) {
       res.end(err.message);
     } else {
-      res.end(geojson);
+      console.log(geojson);
+      //res.end(geojson);
     }
   });
   
