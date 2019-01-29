@@ -21,7 +21,7 @@ http.createServer(function(req, res) {
       var map = new mapnik.Map(256, 256, "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
       var options = {
         type: 'geojson',
-        inline: geojson.toString()
+        inline: JSON.stringify(geojson)
       };
       var datasource = new mapnik.Datasource(options);
       var layer = new mapnik.Layer('layer\'s name', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
