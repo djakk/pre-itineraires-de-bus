@@ -6,7 +6,7 @@ var queryOverpass = require('query-overpass');
 mapnik.register_default_fonts();
 mapnik.register_default_input_plugins();
 
-// https://github.com/bensheldon/mapnik-on-heroku <- thanks !
+// parts of code from https://github.com/bensheldon/mapnik-on-heroku <- thanks !
 var port = process.env.PORT || 3000;
 var stylesheet = './stylesheet.xml';
 
@@ -19,10 +19,28 @@ http.createServer(function(req, res) {
     } else {
       console.log(geojson);
       //res.end(geojson);
+      var map = new mapnik.Map(srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
+      var options = {
+        type: 'geojson',
+        inline: geojson
+      };
+      var datasource = new mapnik.Datasource(options);
+      var layer = new mapnik.Layer('layer\'s name', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
+      layer.datasource = datasource;
+      
+      map.zoomAll();
+      var the_image__for_the_map = new mapnik.Image(256, 256);
+      map.render(im, function(err,im) {
+        if (err) {
+          res.end(err.message);
+        } else {
+          
     }
   });
   
   var map = new mapnik.Map(256, 256);
+  var datasource = new mapnik.datasource();
+  
   map.load(stylesheet,
     function(err,map) {
       if (err) {
