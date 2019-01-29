@@ -1,5 +1,6 @@
 var mapnik = require('mapnik');
 var http = require('http');
+var queryOverpass = require('queryOverpass');
 
 // register fonts and datasource plugins
 mapnik.register_default_fonts();
@@ -11,6 +12,13 @@ var stylesheet = './stylesheet.xml';
 
 http.createServer(function(req, res) {
   res.writeHead(500, {'Content-Type': 'text/plain'});
+  
+  var req = queryOverpass('[out:json];node(57.7,11.9,57.8,12.0)[amenity=bar];out;', function(err, geojson) {
+    if (err) {
+      return t.fail(err);
+    }
+  };
+  
   var map = new mapnik.Map(256, 256);
   map.load(stylesheet,
     function(err,map) {
