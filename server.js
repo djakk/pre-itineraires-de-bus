@@ -17,7 +17,7 @@ http.createServer(function(req, res) {
     if (err) {
       res.end(err.message);
     }
-  };
+  });
   
   var map = new mapnik.Map(256, 256);
   map.load(stylesheet,
