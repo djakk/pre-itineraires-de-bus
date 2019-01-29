@@ -26,7 +26,10 @@ http.createServer(function(req, res) {
       var datasource = new mapnik.Datasource(options);
       var layer = new mapnik.Layer('layer\'s name', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
       
+      var the_point_style = new mapnik.Style('points');
+      
       layer.datasource = datasource;
+      layer.styles = ['points'];
       map.add_layer(layer);
       
       map.zoomAll();
