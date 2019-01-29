@@ -27,7 +27,7 @@ http.createServer(function(req, res) {
       var layer = new mapnik.Layer('layer\'s name', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
       
       layer.datasource = datasource;
-      map.layers.add(layer);
+      map.add_layer(layer);
       
       map.zoomAll();
       var the_image__for_the_map = new mapnik.Image(256, 256);
