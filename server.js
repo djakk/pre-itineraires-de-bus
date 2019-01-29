@@ -16,6 +16,8 @@ http.createServer(function(req, res) {
   var req = queryOverpass('[out:json];node(57.7,11.9,57.8,12.0)[amenity=bar];out;', function(err, geojson) {
     if (err) {
       res.end(err.message);
+    } else {
+      res.end(geojson);
     }
   });
   
