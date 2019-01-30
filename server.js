@@ -30,7 +30,7 @@ http.createServer(function(req, res) {
       s += '</Style>';
       s += '<Style name="lines">';
       s += ' <Rule>';
-      s += '  <LineSymbolizer stroke="" />';
+      s += '  <LineSymbolizer stroke="black" />';
       s += ' </Rule>';
       s += '</Style>';
       s += '</Map>';
