@@ -22,18 +22,9 @@ http.createServer(function(req, res) {
       
       for (var a_feature_index = 0; a_feature_index < geojson["features"].length; a_feature_index++) {
         var a_feature = geojson["features"][a_feature_index];
-        console.log("a_feature : ");
-        console.log(a_feature);
-        console.log(a_feature.toString());
-        console.log(a_feature["id"]);
         var the_colour_of_the_relation;
         try {
-          console.log("where is the relation color ?");
-          console.log(a_feature["properties"]);
-          console.log(a_feature["properties"]["relations"][0]);
-          console.log(a_feature["properties"]["relations"][0]["reltags"]);
           the_colour_of_the_relation = a_feature["properties"]["relations"][0]["reltags"]["colour"];
-          console.log(the_colour_of_the_relation);
         } catch { };
         if (the_colour_of_the_relation) {
           a_feature["properties"]["tags"]["colour"] = the_colour_of_the_relation;
@@ -64,7 +55,6 @@ http.createServer(function(req, res) {
         type: 'geojson',
         inline: JSON.stringify(geojson)
       };
-      console.log(options);
       
       var the_points_datasource = new mapnik.Datasource(options);
       var the_points_layer = new mapnik.Layer('points\' layer', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
