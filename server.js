@@ -20,6 +20,9 @@ http.createServer(function(req, res) {
       console.log("the overpass query has been done");
       console.log(geojson);
       
+      if (! geojson.features) {
+        geojson = {};
+      }
       // map with just a style
       // eventually the api will support adding styles in javascript (!)
       var s = '<Map srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">';
