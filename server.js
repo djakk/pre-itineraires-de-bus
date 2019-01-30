@@ -20,9 +20,6 @@ http.createServer(function(req, res) {
       console.log("the overpass query has been done");
       console.log(geojson);
       
-      if (! geojson.features) {
-        geojson = {};
-      }
       // map with just a style
       // eventually the api will support adding styles in javascript (!)
       var s = '<Map srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">';
@@ -47,6 +44,8 @@ http.createServer(function(req, res) {
         type: 'geojson',
         inline: JSON.stringify(geojson)
       };
+      console.log(options);
+      
       var the_points_datasource = new mapnik.Datasource(options);
       var the_points_layer = new mapnik.Layer('points\' layer', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
       the_points_layer.datasource = the_points_datasource;
