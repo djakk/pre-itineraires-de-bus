@@ -70,5 +70,5 @@ http.createServer(function(req, res) {
         }
       });
     }
-  }, { flatProperties: true });
+  }, { flatProperties: false });
 }).listen(port);
