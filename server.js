@@ -13,7 +13,7 @@ var stylesheet = './stylesheet.xml';
 http.createServer(function(req, res) {
   res.writeHead(500, {'Content-Type': 'text/plain'});
   
-  var req = queryOverpass('[out:json];(rel(57.7,11.9,57.8,12.0)[route=tram];);(._;>;);out;', function(err, geojson) {
+  var req = queryOverpass('[out:json];(rel(57.7,11.9,57.8,12.0)[route=tram][ref=3];rel(57.7,11.9,57.8,12.0)[route=tram][ref=10];);(._;>;);out;', function(err, geojson) {
     if (err) {
       res.end(err.message);
     } else {
@@ -30,7 +30,7 @@ http.createServer(function(req, res) {
       s += '</Style>';
       s += '<Style name="lines">';
       s += ' <Rule>';
-      s += '  <LineSymbolizer stroke="[colour]" />';
+      s += '  <LineSymbolizer stroke="" />';
       s += ' </Rule>';
       s += '</Style>';
       s += '</Map>';
