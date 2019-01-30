@@ -22,9 +22,11 @@ http.createServer(function(req, res) {
       
       var a_feature;
       for (a_feature in geojson.features) {
+        console.log(a_feature);
         var the_colour_of_the_relation;
         try {
           the_colour_of_the_relation = a_feature.properties.relations[0].reltags.colour;
+          console.log(the_colour_of_the_relation);
         } catch { };
         if (the_colour_of_the_relation) {
           a_feature.properties.tags["colour"] = the_colour_of_the_relation;
