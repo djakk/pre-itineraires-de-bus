@@ -36,7 +36,7 @@ http.createServer(function(req, res) {
       s += '</Map>';
       
       // create map object
-      var map = new mapnik.Map(256, 256);
+      var map = new mapnik.Map(1024, 1024);
       map.fromStringSync(s);
       
       console.log("creating the map …");
@@ -54,7 +54,7 @@ http.createServer(function(req, res) {
       
       console.log("creating the image …");
       map.zoomAll();
-      var the_image__for_the_map = new mapnik.Image(256, 256);
+      var the_image__for_the_map = new mapnik.Image(1024, 1024);
       map.render(the_image__for_the_map, function(err,im) {
         if (err) {
           res.end(err.message);
