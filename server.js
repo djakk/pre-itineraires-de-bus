@@ -20,8 +20,10 @@ http.createServer(function(req, res) {
       console.log("the overpass query has been done");
       console.log(geojson);
       
-      var a_feature;
-      for (a_feature in geojson.features) {
+      for (var a_feature in geojson["features"]) {
+        console.log("a_feature : ");
+        console.log(a_feature);
+        console.log(a_feature.toString());
         console.log(a_feature["id"]);
         var the_colour_of_the_relation;
         try {
