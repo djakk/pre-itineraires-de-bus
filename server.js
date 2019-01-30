@@ -42,7 +42,7 @@ http.createServer(function(req, res) {
       console.log("creating the map …");
       var options = {
         type: 'geojson',
-        json: geojson
+        geojson: geojson
       };
       console.log(options);
       
