@@ -13,7 +13,7 @@ var stylesheet = './stylesheet.xml';
 http.createServer(function(req, res) {
   res.writeHead(500, {'Content-Type': 'text/plain'});
   
-  var req = queryOverpass('[out:json];(way(57.7,11.9,57.8,12.0)[railway=tram];);out;', function(err, geojson) {
+  var req = queryOverpass('[out:json];(node(57.7,11.9,57.8,12.0)[amenity=pub];);out;', function(err, geojson) {
     if (err) {
       res.end(err.message);
     } else {
@@ -42,7 +42,7 @@ http.createServer(function(req, res) {
       console.log("creating the map …");
       var options = {
         type: 'geojson',
-        inline: '{"type":"FeatureCollection"}' //inline: JSON.stringify(geojson)
+        inline: JSON.stringify(geojson)
       };
       console.log(options);
       
