@@ -17,7 +17,8 @@ http.createServer(function(req, res) {
     if (err) {
       res.end(err.message);
     } else {
-      //console.log(geojson);
+      console.log("the overpass query has been done");
+      console.log(geojson);
       
       // map with just a style
       // eventually the api will support adding styles in javascript (!)
@@ -38,6 +39,7 @@ http.createServer(function(req, res) {
       var map = new mapnik.Map(256, 256);
       map.fromStringSync(s);
       
+      console.log("creating the map …");
       var options = {
         type: 'geojson',
         inline: JSON.stringify(geojson)
@@ -48,6 +50,7 @@ http.createServer(function(req, res) {
       the_points_layer.styles = ['lines', 'points'];
       map.add_layer(the_points_layer);
       
+      console.log("creating the image …");
       map.zoomAll();
       var the_image__for_the_map = new mapnik.Image(256, 256);
       map.render(the_image__for_the_map, function(err,im) {
