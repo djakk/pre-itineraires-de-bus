@@ -42,7 +42,7 @@ http.createServer(function(req, res) {
       console.log("creating the map …");
       var options = {
         type: 'geojson',
-        inline: JSON.stringify(geojson)
+        inline: '{"type":"FeatureCollection"}' //inline: JSON.stringify(geojson)
       };
       console.log(options);
       
