@@ -27,6 +27,11 @@ http.createServer(function(req, res) {
       s += '  <PointSymbolizer />';
       s += ' </Rule>';
       s += '</Style>';
+      s += '<Style name="lines">';
+      s += ' <Rule>';
+      s += '  <LineSymbolizer />';
+      s += ' </Rule>';
+      s += '</Style>';
       s += '</Map>';
       
       // create map object
@@ -37,12 +42,11 @@ http.createServer(function(req, res) {
         type: 'geojson',
         inline: JSON.stringify(geojson)
       };
-      var datasource = new mapnik.Datasource(options);
-      var layer = new mapnik.Layer('layer\'s name', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
-      
-      layer.datasource = datasource;
-      layer.styles = ['points'];
-      map.add_layer(layer);
+      var the_points_datasource = new mapnik.Datasource(options);
+      var the_points_layer = new mapnik.Layer('points\' layer', "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
+      the_points_layer.datasource = the_points_datasource;
+      the_points_layer.styles = ['points'];
+      map.add_layer(the_points_layer);
       
       map.zoomAll();
       var the_image__for_the_map = new mapnik.Image(256, 256);
