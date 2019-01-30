@@ -22,9 +22,13 @@ http.createServer(function(req, res) {
       
       var a_feature;
       for (a_feature in geojson.features) {
-        console.log(a_feature);
+        console.log(a_feature.id);
         var the_colour_of_the_relation;
         try {
+          console.log("where is the relation color ?");
+          console.log(a_feature.properties);
+          console.log(a_feature.properties.relations[0]);
+          console.log(a_feature.properties.relations[0].reltags);
           the_colour_of_the_relation = a_feature.properties.relations[0].reltags.colour;
           console.log(the_colour_of_the_relation);
         } catch { };
