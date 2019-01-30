@@ -21,7 +21,7 @@ http.createServer(function(req, res) {
       console.log(geojson);
       
       var a_feature;
-      for a_feature in geojson.features {
+      for (a_feature in geojson.features) {
         geojson.features.properties.tags["colour"] = a_feature.properties.reltags.colour;
       }
       
