@@ -28,8 +28,8 @@ http.createServer(function(req, res) {
         } catch { };
         if (the_colour_of_the_relation) {
           //a_feature["properties"]["tags"]["colour"] = the_colour_of_the_relation;
-          //a_feature["properties"]["colour"] = the_colour_of_the_relation;
-          a_feature["colour"] = the_colour_of_the_relation;
+          a_feature["properties"]["colour"] = the_colour_of_the_relation;
+          //a_feature["colour"] = the_colour_of_the_relation;
         }
       }
       
