@@ -22,7 +22,13 @@ http.createServer(function(req, res) {
       
       var a_feature;
       for (a_feature in geojson.features) {
-        geojson.features.properties.tags["colour"] = a_feature.properties.reltags.colour;
+        var the_colour_of_the_relation;
+        try {
+          the_colour_of_the_relation = a_feature.properties.reltags.colour;
+        } catch { };
+        if (the_colour_of_the_relation) {
+          a_feature.properties.tags["colour"] = the_colour_of_the_relation;
+        }
       }
       
       // map with just a style
