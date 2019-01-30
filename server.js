@@ -20,6 +20,11 @@ http.createServer(function(req, res) {
       console.log("the overpass query has been done");
       console.log(geojson);
       
+      var a_feature;
+      for a_feature in geojson.features {
+        geojson.features.properties.tags["colour"] = a_feature.properties.reltags.colour;
+      }
+      
       // map with just a style
       // eventually the api will support adding styles in javascript (!)
       var s = '<Map srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">';
@@ -30,7 +35,7 @@ http.createServer(function(req, res) {
       s += '</Style>';
       s += '<Style name="lines">';
       s += ' <Rule>';
-      s += '  <LineSymbolizer stroke="black" />';
+      s += '  <LineSymbolizer stroke="[colour]" />';
       s += ' </Rule>';
       s += '</Style>';
       s += '</Map>';
