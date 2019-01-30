@@ -13,7 +13,7 @@ var stylesheet = './stylesheet.xml';
 http.createServer(function(req, res) {
   res.writeHead(500, {'Content-Type': 'text/plain'});
   
-  var req = queryOverpass('[out:json];node(57.7,11.9,57.8,12.0)[amenity=bar];way(57.7,11.9,57.8,12.0)[highway];out;', function(err, geojson) {
+  var req = queryOverpass('[out:json];(node(57.7,11.9,57.8,12.0)[amenity=bar];way(57.7,11.9,57.8,12.0)[highway];);out;', function(err, geojson) {
     if (err) {
       res.end(err.message);
     } else {
