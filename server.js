@@ -24,7 +24,7 @@ http.createServer(function(req, res) {
       for (a_feature in geojson.features) {
         var the_colour_of_the_relation;
         try {
-          the_colour_of_the_relation = a_feature.properties.reltags.colour;
+          the_colour_of_the_relation = a_feature.properties.relations[0].reltags.colour;
         } catch { };
         if (the_colour_of_the_relation) {
           a_feature.properties.tags["colour"] = the_colour_of_the_relation;
