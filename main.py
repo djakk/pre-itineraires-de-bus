@@ -1,14 +1,14 @@
 import sys
 import os
 
-print "Coucou ! (from print)"
+print("Coucou ! (from print)")
 sys.stdout.write("Coucou ! (from sys.stdout.write)")
 sys.stdout.flush()
 
 import rq
-print u"'rq' module loaded"
+print(u"'rq' module loaded")
 import redis
-print u"'redis' module loaded"
+print(u"'redis' module loaded")
 
 
 listen = ['high', 'default', 'low']
