@@ -1,5 +1,5 @@
 import sys
 
-print "Coucou !"
-sys.stdout.write("Coucou ")
+print "Coucou ! (from print)"
+sys.stdout.write("Coucou ! (from sys.stdout.write)")
 sys.stdout.flush()
