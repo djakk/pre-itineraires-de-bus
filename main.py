@@ -11,6 +11,10 @@ import redis
 print(u"'redis' module loaded")
 
 
+def aPrintingFunction():
+    print(u"aPrintingFunction has been called !")
+    return 0
+
 listen = ['high', 'default', 'low']
 
 redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
