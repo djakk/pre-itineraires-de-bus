@@ -6,9 +6,7 @@ sys.stdout.write("Coucou ! (from sys.stdout.write)")
 sys.stdout.flush()
 
 import rq
-print(u"'rq' module loaded")
 import redis
-print(u"'redis' module loaded")
 
 
 def aPrintingFunction():
