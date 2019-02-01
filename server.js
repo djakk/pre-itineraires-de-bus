@@ -1,8 +1,9 @@
 var mapnik = require('mapnik');
 var http = require('http');
+
 var queryOverpass = require('query-overpass');
 
-var kue = require('kue');
+var ampqlib = require('amqplib'):
 
 
 // register fonts and datasource plugins
@@ -15,14 +16,22 @@ var stylesheet = './stylesheet.xml';
 
 http.createServer(function(req, res) {
   
-  // trying to call python function aPrintingFunction through Redis database
-  var q = kue.createQueue({
-    redis: process.env.REDIS_URL
-  });
-  var job = q.create('aPrintingFunction', {}).save( function(err){
-      if( !err ) console.log( job.id );
-  });
-
+  // trying to call python function aPrintingFunction through CloudAMPQ (queueing add-on)
+  var q = 'q-tasks';
+  
+  var url = process.env.CLOUDAMQP_URL || "amqp://localhost";
+  var open = ampqlib.connect(url);
+  
+  // Publisher
+  open.then(function(conn) {
+    var ok = conn.createChannel();
+    ok = ok.then(function(ch) {
+      ch.assertQueue(q);
+      ch.sendToQueue(q, new Buffer('aPrintingFunction'));
+    });
+    return ok;
+  }).then(null, console.warn);
+  
   
   res.writeHead(500, {'Content-Type': 'text/plain'});
   
