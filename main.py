@@ -1,25 +1,31 @@
 import sys
 import os
 
+import pika
+
 print("Coucou ! (from print)")
 sys.stdout.write("Coucou ! (from sys.stdout.write)")
 sys.stdout.flush()
 
-import rq
-import redis
 
-
-def aPrintingFunction():
+def aPrintingFunction(ch, method, properties, body):
     print(u"aPrintingFunction has been called !")
     return 0
 
-listen = ['high', 'default', 'low']
+# Parse CLOUDAMQP_URL (fallback to localhost)
+url_str = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//')
+url = urlparse.urlparse(url_str)
+params = pika.ConnectionParameters(host=url.hostname, virtual_host=url.path[1:],
+    credentials=pika.PlainCredentials(url.username, url.password))
 
-redis_url = os.getenv('REDIS_URL')
+connection = pika.BlockingConnection(params) # Connect to CloudAMQP
+channel = connection.channel() # start a channel
+channel.queue_declare(queue='q-tasks') # Declare a queue
 
-conn = redis.from_url(redis_url)
+channel.basic_consume(aPrintingFunction,
+    queue='q-tasks',
+    no_ack=True)
 
-if __name__ == '__main__':
-    with rq.Connection(conn):
-        worker = rq.Worker(map(rq.Queue, listen))
-        worker.work()
+channel.start_consuming() # start consuming (blocks)
+
+connection.close()
