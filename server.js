@@ -3,7 +3,7 @@ var http = require('http');
 
 var queryOverpass = require('query-overpass');
 
-var ampqlib = require('amqplib'):
+var ampqlib = require('amqplib');
 
 
 // register fonts and datasource plugins
