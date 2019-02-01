@@ -2,6 +2,7 @@ import sys
 import os
 
 import pika
+import urlparse
 
 print("Coucou ! (from print)")
 sys.stdout.write("Coucou ! (from sys.stdout.write)")
