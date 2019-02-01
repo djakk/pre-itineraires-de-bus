@@ -2,6 +2,9 @@ var mapnik = require('mapnik');
 var http = require('http');
 var queryOverpass = require('query-overpass');
 
+var kue = require('kue');
+
+
 // register fonts and datasource plugins
 mapnik.register_default_fonts();
 mapnik.register_default_input_plugins();
@@ -11,6 +14,16 @@ var port = process.env.PORT || 3000;
 var stylesheet = './stylesheet.xml';
 
 http.createServer(function(req, res) {
+  
+  // trying to call python function aPrintingFunction through Redis database
+  var q = kue.createQueue({
+    redis: process.env.REDIS_URL
+  });
+  var job = q.create('aPrintingFunction', {}).save( function(err){
+      if( !err ) console.log( job.id );
+  });
+
+  
   res.writeHead(500, {'Content-Type': 'text/plain'});
   
   var req = queryOverpass('[out:json];(rel(57.7,11.9,57.8,12.0)[route=tram][ref=3];rel(57.7,11.9,57.8,12.0)[route=tram][ref=10];);(._;>;);out;', function(err, geojson) {
