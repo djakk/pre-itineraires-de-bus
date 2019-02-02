@@ -12,6 +12,11 @@ sys.stdout.write("Coucou ! (from sys.stdout.write)")
 sys.stdout.flush()
 
 
+# Parse CLOUDAMQP_URL (fallback to localhost)
+url_str = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost/%2f')
+params = pika.URLParameters(url_str)
+
+
 def aPrintingFunction(ch, method, properties, body):
     print(u"aPrintingFunction has been called !")
     print(properties)
@@ -22,12 +27,12 @@ def theCallbackFunction(ch, method, properties, body):
     print(u"inside theCallbackFunction")
     the_datas = from_osm2.get_data_from_osm()
     # send a response
-    ch.basic_publish(exchange='', routing_key='hello', body='the body')
+    the_connection = pika.BlockingConnection(params)
+    the_channel = the_connection.channel()
+    the_channel.queue_declare(queue='myQueue3')
+    the_channel.basic_publish(exchange='', routing_key='hello', body='the body')
     return
 
-# Parse CLOUDAMQP_URL (fallback to localhost)
-url_str = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost/%2f')
-params = pika.URLParameters(url_str)
 
 print(u"connection …")
 connection = pika.BlockingConnection(params) # Connect to CloudAMQP
