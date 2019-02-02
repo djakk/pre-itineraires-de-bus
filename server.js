@@ -27,13 +27,18 @@ http.createServer(function(req, res) {
   // Consumer
   console.log("Consumer …");
   open.then(function(conn) {
+    console.log("conn.createChannel …");
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
+      console.log("ch.assertQueue …");
       ch.assertQueue(q3);
+      console.log("ch.consume …");
       ch.consume(q3, function(msg) {
-       if (msg !== null) {
+        console.log("inside ch.consume …");
+        console.log(msg);
+        if (msg !== null) {
           console.log(msg.content.toString());
-         ch.ack(msg);
+          ch.ack(msg);
         }
       });
     });
