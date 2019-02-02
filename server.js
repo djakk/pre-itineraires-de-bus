@@ -30,9 +30,9 @@ http.createServer(function(req, res) {
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
       console.log("assertQueue …");
-      ch.assertQueue(q);
+      //ch.assertQueue(q);
       console.log("sendToQueue …");
-      //ch.sendToQueue(q, new Buffer('myBuffer'));
+      ch.sendToQueue(q, new Buffer('myBuffer'));
     });
     return ok;
   }).then(null, console.warn);
