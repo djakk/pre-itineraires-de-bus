@@ -3,6 +3,8 @@ import os
 
 import pika
 
+import from_osm
+
 
 print("Coucou ! (from print)")
 sys.stdout.write("Coucou ! (from sys.stdout.write)")
@@ -26,7 +28,7 @@ channel = connection.channel() # start a channel
 #channel.queue_declare(queue='myQueue') # Declare a queue
 
 print(u"channel.basic_consume …")
-channel.basic_consume(aPrintingFunction,
+channel.basic_consume(from_osm.get_data_from_osm,
     queue='myQueue2',
     no_ack=False) # no_ack=False <- if 'myQueue2' does not exists, do not sent a 404 error
 
