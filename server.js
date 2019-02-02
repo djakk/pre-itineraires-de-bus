@@ -23,6 +23,22 @@ http.createServer(function(req, res) {
   console.log("ampqlib.connect …");
   var open = ampqlib.connect(url);
   
+  // Consumer
+  console.log("Consumer …");
+  open.then(function(conn) {
+    var ok = conn.createChannel();
+    ok = ok.then(function(ch) {
+      ch.assertQueue(q);
+      ch.consume(q, function(msg) {
+       if (msg !== null) {
+          console.log(msg.content.toString());
+         ch.ack(msg);
+        }
+      });
+    });
+    return ok;
+  }).then(null, console.warn);
+  
   // Publisher
   console.log("Publisher …");
   open.then(function(conn) {
