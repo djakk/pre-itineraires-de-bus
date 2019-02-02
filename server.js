@@ -105,7 +105,8 @@ http.createServer(function(req, res) {
       var options = {
         type: 'postgis',
         uri: process.env.DATABASE_URL, 
-        url: process.env.DATABASE_URL
+        url: process.env.DATABASE_URL, 
+        table: 'myTable'
       };
       
       var the_points_datasource = new mapnik.Datasource(options);
