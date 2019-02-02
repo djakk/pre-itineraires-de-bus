@@ -28,7 +28,7 @@ channel = connection.channel() # start a channel
 print(u"channel.basic_consume …")
 channel.basic_consume(aPrintingFunction,
     queue='myQueue2',
-    no_ack=False)
+    no_ack=False) # no_ack=False <- if 'myQueue2' does not exists, do not sent a 404 error
 
 print(u"channel.start_consuming …")
 channel.start_consuming() # start consuming (blocks)
