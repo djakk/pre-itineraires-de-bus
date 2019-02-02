@@ -2,7 +2,7 @@ import sys
 import os
 
 import pika
-import urllib.parse
+
 
 print("Coucou ! (from print)")
 sys.stdout.write("Coucou ! (from sys.stdout.write)")
@@ -14,10 +14,8 @@ def aPrintingFunction(ch, method, properties, body):
     return 0
 
 # Parse CLOUDAMQP_URL (fallback to localhost)
-url_str = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//')
-url = urllib.parse.urlparse(url_str)
-params = pika.ConnectionParameters(host=url.hostname, virtual_host=url.path[1:],
-    credentials=pika.PlainCredentials(url.username, url.password))
+url_str = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost/%2f')
+params = pika.URLParameters(url)
 
 print(u"connection …")
 connection = pika.BlockingConnection(params) # Connect to CloudAMQP
