@@ -33,4 +33,5 @@ channel.basic_consume(aPrintingFunction,
 print(u"channel.start_consuming …")
 channel.start_consuming() # start consuming (blocks)
 
+print(u"connection.close …")
 connection.close()
