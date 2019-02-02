@@ -19,7 +19,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   the_cursor.executemany("""\
 INSERT INTO myTable 
        (osm_id,   geometry) 
-VALUES (%(id)s, %(geometry)s);\
+VALUES (%(id)s, ST_GeomFromText(%(geometry)s, 4326));\
 """, the_osm_datas.to_dict('records'))
   the_cursor.close()
   
