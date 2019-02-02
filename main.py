@@ -11,6 +11,8 @@ sys.stdout.flush()
 
 def aPrintingFunction(ch, method, properties, body):
     print(u"aPrintingFunction has been called !")
+    print(properties)
+    print(body)
     return 0
 
 # Parse CLOUDAMQP_URL (fallback to localhost)
@@ -25,7 +27,7 @@ channel = connection.channel() # start a channel
 
 print(u"channel.basic_consume …")
 channel.basic_consume(aPrintingFunction,
-    queue='myQueue',
+    queue='myQueue2',
     no_ack=True)
 
 print(u"channel.start_consuming …")
