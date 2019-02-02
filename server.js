@@ -32,7 +32,7 @@ http.createServer(function(req, res) {
       console.log("assertQueue …");
       ch.assertQueue(q);
       console.log("sendToQueue …");
-      ch.sendToQueue(q, new Buffer('myBuffer'));
+      //ch.sendToQueue(q, new Buffer('myBuffer'));
     });
     return ok;
   }).then(null, console.warn);
