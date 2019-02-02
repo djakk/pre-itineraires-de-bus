@@ -16,7 +16,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   the_cursor.close()
   
   the_cursor = the_connection.cursor()
-  the_cursor.executemany("""INSERT INTO myTable (osm_id) VALUES (%(id)s);""", the_osm_datas)
+  the_cursor.executemany("""INSERT INTO myTable (osm_id) VALUES (%(id)s);""", the_osm_datas.to_dict('records'))
   the_cursor.close()
   
   the_connection.commit()
