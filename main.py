@@ -17,7 +17,7 @@ def aPrintingFunction(ch, method, properties, body):
 
 # Parse CLOUDAMQP_URL (fallback to localhost)
 url_str = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost/%2f')
-params = pika.URLParameters(url)
+params = pika.URLParameters(url_str)
 
 print(u"connection …")
 connection = pika.BlockingConnection(params) # Connect to CloudAMQP
