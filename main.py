@@ -21,10 +21,10 @@ params = pika.ConnectionParameters(host=url.hostname, virtual_host=url.path[1:],
 
 connection = pika.BlockingConnection(params) # Connect to CloudAMQP
 channel = connection.channel() # start a channel
-channel.queue_declare(queue='aPrintingFunction') # Declare a queue
+channel.queue_declare(queue='myQueue') # Declare a queue
 
 channel.basic_consume(aPrintingFunction,
-    queue='aPrintingFunction',
+    queue='myQueue',
     no_ack=True)
 
 channel.start_consuming() # start consuming (blocks)
