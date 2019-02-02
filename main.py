@@ -20,7 +20,9 @@ def aPrintingFunction(ch, method, properties, body):
 
 def theCallbackFunction(ch, method, properties, body):
     print(u"inside theCallbackFunction")
-    from_osm2.get_data_from_osm()
+    the_datas = from_osm2.get_data_from_osm()
+    # send a response
+    ch.basic_publish(exchange='', routing_key='hello', body=the_datas)
     return
 
 # Parse CLOUDAMQP_URL (fallback to localhost)
