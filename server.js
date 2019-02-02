@@ -27,14 +27,14 @@ http.createServer(function(req, res) {
   // Consumer
   console.log("Consumer …");
   open.then(function(conn) {
-    console.log("conn.createChannel …");
+    console.log("Consumer : conn.createChannel …");
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
-      console.log("ch.assertQueue …");
+      console.log("Consumer : ch.assertQueue …");
       ch.assertQueue(q3);
-      console.log("ch.consume …");
+      console.log("Consumer : ch.consume …");
       ch.consume(q3, function(msg) {
-        console.log("inside ch.consume …");
+        console.log("Consumer : inside ch.consume …");
         console.log(msg);
         if (msg !== null) {
           console.log(msg.content.toString());
@@ -48,12 +48,12 @@ http.createServer(function(req, res) {
   // Publisher
   console.log("Publisher …");
   open.then(function(conn) {
-    console.log("conn.createChannel …");
+    console.log("Publisher : conn.createChannel …");
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
-      console.log("assertQueue …");
+      console.log("Publisher : assertQueue …");
       ch.assertQueue(q, {durable: false, noAck: true, the_argument: "blabla"});
-      console.log("sendToQueue …");
+      console.log("Publisher : sendToQueue …");
       ch.sendToQueue(q, new Buffer('myBuffer2'));
     });
     return ok;
