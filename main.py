@@ -3,8 +3,8 @@ import os
 
 import pika
 
-import from_osm
-import from_osm.from_osm as from_osm2
+import osm_io
+import osm_io.from_osm
 
 
 print("Coucou ! (from print)")
@@ -21,12 +21,14 @@ def aPrintingFunction(ch, method, properties, body):
     print(u"aPrintingFunction has been called !")
     print(properties)
     print(body)
-    return 0
+    return
 
 def theCallbackFunction(ch, method, properties, body):
     print(u"inside theCallbackFunction")
-    the_datas = from_osm2.get_data_from_osm()
-    # send a response
+    the_datas = osm_io.from_osm.get_data_from_osm()
+    # geopandas -> postgresql database
+    osm_io.to_postgresql(the_datas, os.environ.get('DATABASE_URL'))
+    # datas are ready inside the postgresql database : send a response back to NodeJS
     the_connection = pika.BlockingConnection(params)
     the_channel = the_connection.channel()
     the_channel.queue_declare(queue='myQueue3', durable=False)
