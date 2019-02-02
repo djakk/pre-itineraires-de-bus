@@ -1,3 +1,4 @@
 pika==0.13.0
 shapely==1.6.4
 git+https://github.com/jwass/geopandas_osm.git
+psycopg2==2.7.7
