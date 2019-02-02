@@ -1,6 +1,5 @@
 import sys
 import os
-import time
 
 import pika
 
@@ -9,7 +8,6 @@ print("Coucou ! (from print)")
 sys.stdout.write("Coucou ! (from sys.stdout.write)")
 sys.stdout.flush()
 
-time.sleep(30)
 
 def aPrintingFunction(ch, method, properties, body):
     print(u"aPrintingFunction has been called !")
