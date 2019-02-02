@@ -18,6 +18,7 @@ http.createServer(function(req, res) {
   
   // trying to call python function aPrintingFunction through CloudAMPQ (queueing add-on)
   var q = 'myQueue2';
+  var q3 = 'myQueue3';
   
   var url = process.env.CLOUDAMQP_URL || "amqp://localhost";
   console.log("ampqlib.connect …");
@@ -28,8 +29,8 @@ http.createServer(function(req, res) {
   open.then(function(conn) {
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
-      ch.assertQueue(q);
-      ch.consume(q, function(msg) {
+      ch.assertQueue(q3);
+      ch.consume(q3, function(msg) {
        if (msg !== null) {
           console.log(msg.content.toString());
          ch.ack(msg);
