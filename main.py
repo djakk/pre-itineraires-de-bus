@@ -19,6 +19,7 @@ def aPrintingFunction(ch, method, properties, body):
     return 0
 
 def theCallbackFunction(ch, method, properties, body):
+    print(u"inside theCallbackFunction")
     from_osm2.get_data_from_osm()
     return
 
