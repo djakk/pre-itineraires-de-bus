@@ -18,6 +18,10 @@ def aPrintingFunction(ch, method, properties, body):
     print(body)
     return 0
 
+def theCallbackFunction(ch, method, properties, body):
+    from_osm2.get_data_from_osm()
+    return
+
 # Parse CLOUDAMQP_URL (fallback to localhost)
 url_str = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost/%2f')
 params = pika.URLParameters(url_str)
@@ -29,7 +33,7 @@ channel = connection.channel() # start a channel
 #channel.queue_declare(queue='myQueue') # Declare a queue
 
 print(u"channel.basic_consume …")
-channel.basic_consume(from_osm2.get_data_from_osm,
+channel.basic_consume(theCallbackFunction,
     queue='myQueue2',
     no_ack=False) # no_ack=False <- if 'myQueue2' does not exists, do not sent a 404 error
 
