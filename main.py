@@ -29,7 +29,7 @@ def theCallbackFunction(ch, method, properties, body):
     # send a response
     the_connection = pika.BlockingConnection(params)
     the_channel = the_connection.channel()
-    the_channel.queue_declare(queue='myQueue3')
+    the_channel.queue_declare(queue='myQueue3', durable=False)
     the_channel.basic_publish(exchange='', routing_key='hello', body='the body')
     return
 
