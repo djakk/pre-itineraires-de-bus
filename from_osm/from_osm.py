@@ -11,4 +11,4 @@ def get_data_from_osm():
   the_roads = geopandas_osm.osm.query_osm('way', bbox=bbox, recurse='down', tags='highway')
   the_roads = the_roads[the_roads.type == 'LineString'][['id', 'highway', 'name', 'geometry']].to_crs({'init': 'epsg:5837'}) # 5837 = 900913
   #print(the_roads.unary_union) # à afficher dans qgis avec WKT
-  return the_roads.unary_union
+  return the_roads
