@@ -25,7 +25,7 @@ channel.queue_declare(queue='myQueue') # Declare a queue
 
 channel.basic_consume(aPrintingFunction,
     queue='myQueue',
-    no_ack=True)
+    no_ack=False)
 
 channel.start_consuming() # start consuming (blocks)
 
