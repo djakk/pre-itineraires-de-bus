@@ -17,7 +17,7 @@ var stylesheet = './stylesheet.xml';
 http.createServer(function(req, res) {
   
   // trying to call python function aPrintingFunction through CloudAMPQ (queueing add-on)
-  var q = 'myQueue';
+  var q = 'myQueue2';
   
   var url = process.env.CLOUDAMQP_URL || "amqp://localhost";
   console.log("ampqlib.connect …");
@@ -30,9 +30,9 @@ http.createServer(function(req, res) {
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
       console.log("assertQueue …");
-      //ch.assertQueue(q);
+      ch.assertQueue(q, {durable: false, noAck: true, the_argument: "blabla"});
       console.log("sendToQueue …");
-      ch.sendToQueue(q, new Buffer('myBuffer'));
+      ch.sendToQueue(q, new Buffer('myBuffer2'));
     });
     return ok;
   }).then(null, console.warn);
