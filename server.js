@@ -20,13 +20,18 @@ http.createServer(function(req, res) {
   var q = 'myQueue';
   
   var url = process.env.CLOUDAMQP_URL || "amqp://localhost";
+  console.log("ampqlib.connect …");
   var open = ampqlib.connect(url);
   
   // Publisher
+  console.log("Publisher …");
   open.then(function(conn) {
+    console.log("conn.createChannel …");
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
+      console.log("assertQueue …");
       ch.assertQueue(q);
+      console.log("sendToQueue …");
       ch.sendToQueue(q, new Buffer('myBuffer'));
     });
     return ok;
