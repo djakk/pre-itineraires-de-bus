@@ -19,14 +19,18 @@ url = urllib.parse.urlparse(url_str)
 params = pika.ConnectionParameters(host=url.hostname, virtual_host=url.path[1:],
     credentials=pika.PlainCredentials(url.username, url.password))
 
+print(u"connection …")
 connection = pika.BlockingConnection(params) # Connect to CloudAMQP
+print(u"channel …")
 channel = connection.channel() # start a channel
 #channel.queue_declare(queue='myQueue') # Declare a queue
 
+print(u"channel.basic_consume …")
 channel.basic_consume(aPrintingFunction,
     queue='myQueue',
     no_ack=True)
 
+print(u"channel.start_consuming …")
 channel.start_consuming() # start consuming (blocks)
 
 connection.close()
