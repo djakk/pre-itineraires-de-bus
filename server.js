@@ -45,7 +45,7 @@ http.createServer(function(req, res) {
       res.end(err.message);
     } else {
       console.log("the overpass query has been done");
-      console.log(geojson);
+      console.log(geojson.features.length);
       
       for (var a_feature_index = 0; a_feature_index < geojson["features"].length; a_feature_index++) {
         var a_feature = geojson["features"][a_feature_index];
