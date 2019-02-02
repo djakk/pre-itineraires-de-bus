@@ -9,8 +9,8 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     CREATE TABLE myTable (osm_id  bigint, properties  hstore, geometry  geometry);
   """
   print("inside 'save_to_postgresql'")
-  print the_osm_datas
-  print the_osm_datas.to_dict('records')
+  print(the_osm_datas)
+  print(the_osm_datas.to_dict('records'))
   
   the_connection = psycopg2.connect(the_url_to_the_database)
   
