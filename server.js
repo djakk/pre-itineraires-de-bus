@@ -103,8 +103,9 @@ http.createServer(function(req, res) {
       
       console.log("creating the map …");
       var options = {
-        type: 'geojson',
-        inline: JSON.stringify(geojson)
+        type: 'postgis',
+        uri: process.env.DATABASE_URL, 
+        url: process.env.DATABASE_URL
       };
       
       var the_points_datasource = new mapnik.Datasource(options);
