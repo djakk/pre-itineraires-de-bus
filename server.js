@@ -31,7 +31,7 @@ http.createServer(function(req, res) {
     var ok = conn.createChannel();
     ok = ok.then(function(ch) {
       console.log("Consumer : ch.assertQueue …");
-      ch.assertQueue(q3, {durable: false, noAck: true}););
+      ch.assertQueue(q3, {durable: false, noAck: true});
       console.log("Consumer : ch.consume …");
       ch.consume(q3, function(msg) {
         console.log("Consumer : inside ch.consume …");
