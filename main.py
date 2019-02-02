@@ -28,7 +28,8 @@ channel = connection.channel() # start a channel
 print(u"channel.basic_consume …")
 channel.basic_consume(aPrintingFunction,
     queue='myQueue2',
-    no_ack=True)
+    no_ack=True, 
+    durable=False)
 
 print(u"channel.start_consuming …")
 channel.start_consuming() # start consuming (blocks)
