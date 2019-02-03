@@ -10,11 +10,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   """
   print("inside 'save_to_postgresql'")
   print(the_osm_datas)
-  #print(the_osm_datas.to_dict('records'))
-  
-  
-  # work on the geometry column 
-  the_osm_datas.geometry = the_osm_datas.geometry.wkb_hex()
+  #print(the_osm_datas.to_dict('records'))  
   
   
   the_connection = psycopg2.connect(the_url_to_the_database)
@@ -33,12 +29,15 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     the_record_as_a_copy = { a_key : a_value for a_key, a_value in the_record_as_a_copy.items() if a_value is not null}
     a_record["properties"] = the_record_as_a_copy
     
+    # work on the geometry column
+    a_record["geometry"] = a_record["geometry"].wkb_hex()
+    
     the_cursor = the_connection.cursor()
     the_cursor.executemany("""\
 INSERT INTO myTable 
        (osm_id,   geometry,     properties) 
 VALUES (%(id)s, %(geometry)s, %(properties));\
-""", the_record_as_a_copy)
+""", a_record)
     the_cursor.close()
   
   the_connection.commit()
