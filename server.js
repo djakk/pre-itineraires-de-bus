@@ -112,7 +112,7 @@ http.createServer(function(req, res) {
         dbname: the_database_url.pathname.substring(1), 
         user: the_database_url.username,
         password: the_database_url.password, 
-        table: 'myTable', 
+        table: 'mytable', 
         geometry_field: 'geometry'
       };
       
