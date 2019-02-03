@@ -34,14 +34,14 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     # work on the geometry column
     a_record["geometry"] = a_record["geometry"].wkb_hex
     
-    #print(a_record)
+    print(a_record)
     
     the_cursor = the_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
     psycopg2.extras.register_hstore(the_cursor)
     the_cursor.execute("""\
 INSERT INTO mytable 
        (osm_id,   geometry,     properties) 
-VALUES (%(id)s::bigint, %(geometry)s::geometry, %(properties)s::hstore);\
+VALUES (%(id)s, %(geometry)s, %(properties)s);\
 """, a_record)
     the_cursor.close()
   
