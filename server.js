@@ -1,5 +1,6 @@
 var mapnik = require('mapnik');
 var http = require('http');
+//const url = require('url');
 
 var queryOverpass = require('query-overpass');
 
@@ -102,10 +103,15 @@ http.createServer(function(req, res) {
       map.fromStringSync(s);
       
       console.log("creating the map …");
+      
+      the_database_url = new URL(process.env.DATABASE_URL)
       var options = {
         type: 'postgis',
-        uri: process.env.DATABASE_URL, 
-        url: process.env.DATABASE_URL, 
+        host: the_database_url.hostname, 
+        port: the_database_url.port, 
+        dbname: the_database_url.pathname, 
+        user: the_database_url.username,
+        password: the_database_url.password, 
         table: 'myTable'
       };
       
