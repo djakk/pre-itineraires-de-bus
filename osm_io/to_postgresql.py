@@ -26,7 +26,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     the_record_as_a_copy = dict(a_record)
     del the_record_as_a_copy["id"]
     del the_record_as_a_copy["geometry"]
-    the_record_as_a_copy = { a_key : a_value for a_key, a_value in the_record_as_a_copy.items() if a_value is not null}
+    the_record_as_a_copy = { a_key : a_value for a_key, a_value in the_record_as_a_copy.items() if a_value is not None}
     a_record["properties"] = the_record_as_a_copy
     
     # work on the geometry column
