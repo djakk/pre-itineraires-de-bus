@@ -1,5 +1,5 @@
 import psycopg2
-psycopg2.extras
+import psycopg2.extras
 
 
 def save_to_postgresql(the_osm_datas, the_url_to_the_database):
