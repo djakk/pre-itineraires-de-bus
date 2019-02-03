@@ -10,7 +10,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   """
   print("inside 'save_to_postgresql'")
   print(the_osm_datas)
-  print(the_osm_datas.to_dict('records'))
+  #print(the_osm_datas.to_dict('records'))
   
   
   # work on the geometry column 
@@ -23,13 +23,23 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   the_cursor.execute("""DELETE FROM myTable;""")
   the_cursor.close()
   
-  the_cursor = the_connection.cursor()
-  the_cursor.executemany("""\
+  the_osm_datas_as_records = the_osm_datas.to_dict('records')
+  for a_record in the_osm_datas_as_records:
+    
+    # extract the non-null properties of the record, except id and geometry
+    the_record_as_a_copy = dict(a_record)
+    del the_record_as_a_copy["id"]
+    del the_record_as_a_copy["geometry"]
+    the_record_as_a_copy = { a_key : a_value for a_key, a_value in the_record_as_a_copy.items() if a_value is not null}
+    a_record["properties"] = the_record_as_a_copy
+    
+    the_cursor = the_connection.cursor()
+    the_cursor.executemany("""\
 INSERT INTO myTable 
-       (osm_id,   geometry) 
-VALUES (%(id)s, %(geometry)s);\
-""", the_osm_datas.to_dict('records'))
-  the_cursor.close()
+       (osm_id,   geometry,     properties) 
+VALUES (%(id)s, %(geometry)s, %(properties));\
+""", the_record_as_a_copy)
+    the_cursor.close()
   
   the_connection.commit()
   the_connection.close()
