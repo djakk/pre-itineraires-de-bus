@@ -15,7 +15,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   
   the_connection = psycopg2.connect(the_url_to_the_database)
   
-  the_cursor = the_connection.cursor()
+  the_cursor = the_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
   the_cursor.execute("""DELETE FROM myTable;""")
   the_cursor.close()
   
@@ -34,7 +34,8 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     
     #print(a_record)
     
-    the_cursor = the_connection.cursor()
+    the_cursor = the_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    psycopg2.extras.register_hstore(the_cursor)
     the_cursor.execute("""\
 INSERT INTO mytable 
        (osm_id,   geometry,     properties) 
