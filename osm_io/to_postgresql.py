@@ -6,7 +6,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     CREATE EXTENSION postgis;
     CREATE EXTENSION hstore;
     
-    CREATE TABLE myTable (osm_id  bigint, properties  hstore, geometry  geometry);
+    CREATE TABLE mytable (osm_id  bigint, properties  hstore, geometry  geometry);
   """
   print("inside 'save_to_postgresql'")
   print(the_osm_datas)
@@ -32,11 +32,11 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     # work on the geometry column
     a_record["geometry"] = a_record["geometry"].wkb_hex
     
-    print(a_record)
+    #print(a_record)
     
     the_cursor = the_connection.cursor()
-    the_cursor.executemany("""\
-INSERT INTO myTable 
+    the_cursor.execute("""\
+INSERT INTO mytable 
        (osm_id,   geometry,     properties) 
 VALUES (%(id)s::bigint, %(geometry)s::geometry, %(properties)s::hstore);\
 """, a_record)
