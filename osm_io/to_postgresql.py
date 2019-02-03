@@ -34,7 +34,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     # work on the geometry column
     a_record["geometry"] = a_record["geometry"].wkb_hex
     
-    print(a_record)
+    #print(a_record)
     
     the_cursor = the_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
     psycopg2.extras.register_hstore(the_cursor)
