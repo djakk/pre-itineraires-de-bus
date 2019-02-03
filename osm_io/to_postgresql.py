@@ -38,7 +38,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     the_cursor.executemany("""\
 INSERT INTO myTable 
        (osm_id,   geometry,     properties) 
-VALUES (%(id)s, %(geometry)s, %(properties)s::hstore);\
+VALUES (%(id)s::bigint, %(geometry)s::geometry, %(properties)s::hstore);\
 """, a_record)
     the_cursor.close()
   
