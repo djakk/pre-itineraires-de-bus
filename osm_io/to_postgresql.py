@@ -12,6 +12,11 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   print(the_osm_datas)
   print(the_osm_datas.to_dict('records'))
   
+  
+  # work on the geometry column 
+  the_osm_datas.geometry = the_osm_datas.geometry.wkb_hex()
+  
+  
   the_connection = psycopg2.connect(the_url_to_the_database)
   
   the_cursor = the_connection.cursor()
