@@ -112,7 +112,7 @@ http.createServer(function(req, res) {
         dbname: the_database_url.pathname.substring(1), 
         user: the_database_url.username,
         password: the_database_url.password, 
-        table: 'mytable', 
+        table: "(SELECT geometry, 'red' AS colour FROM mytable) AS roads", 
         geometry_field: 'geometry'
       };
       
