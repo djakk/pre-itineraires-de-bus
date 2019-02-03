@@ -109,7 +109,7 @@ http.createServer(function(req, res) {
         type: 'postgis',
         host: the_database_url.hostname, 
         port: the_database_url.port, 
-        dbname: the_database_url.pathname, 
+        dbname: the_database_url.pathname.substring(1), 
         user: the_database_url.username,
         password: the_database_url.password, 
         table: 'myTable'
