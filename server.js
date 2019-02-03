@@ -112,7 +112,8 @@ http.createServer(function(req, res) {
         dbname: the_database_url.pathname.substring(1), 
         user: the_database_url.username,
         password: the_database_url.password, 
-        table: 'myTable'
+        table: 'myTable', 
+        geometry_field: 'geometry'
       };
       
       var the_points_datasource = new mapnik.Datasource(options);
