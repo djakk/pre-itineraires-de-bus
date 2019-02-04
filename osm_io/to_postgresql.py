@@ -1,7 +1,7 @@
 import psycopg2
 import psycopg2.extras
 
-import geopandas
+import pandas
 
 
 def save_to_postgresql(the_osm_datas, the_url_to_the_database):
@@ -25,7 +25,7 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   
   # .to_dict('records') convert NaN to "nan" instead of None, so we have to convert NaN to None before
   # (this changes the dtype of all columns to object)
-  the_osm_datas_as_records = the_osm_datas.where((geopandas.notnull(the_osm_datas)), None).to_dict('records')
+  the_osm_datas_as_records = the_osm_datas.where((pandas.notnull(the_osm_datas)), None).to_dict('records')
   
   for a_record in the_osm_datas_as_records:
     
