@@ -1,7 +1,7 @@
 import psycopg2
 import psycopg2.extras
 
-import math
+import geopandas
 
 
 def save_to_postgresql(the_osm_datas, the_url_to_the_database):
@@ -23,14 +23,17 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   the_cursor.execute("""DELETE FROM myTable;""")
   the_cursor.close()
   
-  the_osm_datas_as_records = the_osm_datas.to_dict('records')
+  # .to_dict('records') convert NaN to "nan" instead of None, so we have to convert NaN to None before
+  # (this changes the dtype of all columns to object)
+  the_osm_datas_as_records = the_osm_datas.where((geopandas.notnull(the_osm_datas)), None).to_dict('records')
+  
   for a_record in the_osm_datas_as_records:
     
-    # extract the non-null properties of the record, except id and geometry
+    # extract the non-None properties of the record, except id and geometry
     the_record_as_a_copy = dict(a_record)
     del the_record_as_a_copy["id"]
     del the_record_as_a_copy["geometry"]
-    the_record_as_a_copy = { a_key : a_value for a_key, a_value in the_record_as_a_copy.items() if math.isnan(a_value)} # nan != null
+    the_record_as_a_copy = { a_key : a_value for a_key, a_value in the_record_as_a_copy.items() if a_value is not None}
     a_record["properties"] = the_record_as_a_copy
     
     # work on the geometry column
