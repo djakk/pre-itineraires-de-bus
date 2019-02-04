@@ -104,7 +104,7 @@ http.createServer(function(req, res) {
       
       console.log("creating the map …");
       
-      the_database_url = new URL(process.env.DATABASE_URL)
+      the_database_url = new URL(process.env.DATABASE_URL);
       var options = {
         type: 'postgis',
         host: the_database_url.hostname, 
