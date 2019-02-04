@@ -1,4 +1,5 @@
 import geopandas
+import copy
 
 
 # line generalization : from one line to several points, by cutting lines in half
@@ -17,7 +18,7 @@ def generalize(the_geometries, the_generalization_size):
       the_length = the_length /2.0
       the_number_of_slices_to_be_done = 2* the_number_of_slices_to_be_done +1
     for a_slice in range(0, the_number_of_slices_to_be_done +1 +1):
-      the_geometry_as_a_point = a_geometry.copy()
+      the_geometry_as_a_point = copy.copy(a_geometry)
       the_fraction = a_slice / ( float(the_number_of_slices_to_be_done) +1 )
       the_geometry_as_a_point.geometry = a_geometry.geometry.interpolate(the_fraction, normalized=True)
       the_geometry_as_a_point['the_position'] = a_slice +1
