@@ -8,7 +8,7 @@ def generalize(the_geometries, the_generalization_size):
   
   for a_geometry in the_geometries.itertuples():
     
-    if a_geometry.geom_type != "LineString":
+    if a_geometry.geometry.geom_type != "LineString":
       continue
     
     the_length = a_geometry.geometry.length
