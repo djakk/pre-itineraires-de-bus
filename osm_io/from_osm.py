@@ -27,7 +27,8 @@ def get_data_from_osm():
   #the_roads = the_roads.groupby(by=["id", "geometry"], axis=1).apply(list)
   #the_roads = the_roads.groupby(by=["id", "geometry"], axis=1, level=0).groups
   # pandas merge columns : https://stackoverflow.com/questions/19377969/combine-two-columns-of-text-in-dataframe-in-pandas-python
-  the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda x: {a_key : a_value for a_key, a_value in zip(the_properties_as_name, x) if not numpy.isnan(a_value)}, axis=1)
+  #the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda x: {a_key : a_value for a_key, a_value in zip(the_properties_as_name, x) if not numpy.isnan(a_value)}, axis=1)
+  the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda x: printing_function(x), axis=1)
   #the_roads['properties'] = the_roads["name"] + the_roads["highway"]
   print("just after '.groupby' : ")
   print(list(the_roads))
@@ -36,3 +37,11 @@ def get_data_from_osm():
   the_roads = the_roads[the_roads.type == 'LineString'][['id', 'highway', 'name', 'geometry']].to_crs({'init': 'epsg:5837'}) # 5837 = 900913
   #print(the_roads.unary_union) # à afficher dans qgis avec WKT
   return the_roads
+
+def printing_function(x):
+  print("priting_function")
+  print(x)
+  print(len(x))
+  for i in x:
+    print(i)
+  return x
