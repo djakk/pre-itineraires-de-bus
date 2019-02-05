@@ -14,7 +14,6 @@ def generalize(the_geometries, the_generalization_size):
     .melt(id_vars = ['id', 'name'], value_name = "geometry_2") \
     .drop("variable", axis = 1) \
     .dropna()
-  the_geometries_2 = the_geometries.geometry.apply(pandas.Series)
   
   print(list(the_geometries_2)) # print columns' name
   print(the_geometries_2)
