@@ -10,9 +10,9 @@ def generalize(the_geometries, the_generalization_size):
   # help : https://mikulskibartosz.name/how-to-split-a-list-inside-a-dataframe-cell-into-rows-in-pandas-9849d8ff2401 : 
   the_geometries_2 = the_geometries.geometry.apply(pandas.Series) \
     .merge(the_geometries, left_index = True, right_index = True) \
-    .drop("geometry", axis = 1) \
-    .melt(id_vars = ['id'], value_name = "geometry") \
-    .drop("variable", axis = 1)
+    .melt(id_vars = ['id', 'name'], value_name = "geometry_2") \
+    .drop("variable", axis = 1) \
+    .dropna()
   the_geometries_2 = the_geometries.geometry.apply(pandas.Series)
   
   print(list(the_geometries_2)) # print columns' name
