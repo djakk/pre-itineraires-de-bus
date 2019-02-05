@@ -11,7 +11,7 @@ def generalize(the_geometries, the_generalization_size):
   the_geometries_as_points = the_geometries.geometry.apply(pandas.Series) \
     .drop(["geometry"], axis = 1) \
     .merge(the_geometries, left_index = True, right_index = True) \
-    .melt(id_vars = ['id'], value_name = "geometry") \ 
+    .melt(id_vars = ['id'], value_name = "geometry") \
     .drop("variable", axis = 1)
   print(list(the_geometries_as_points)) # print columns' name
   print(the_geometries_as_points)
