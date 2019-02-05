@@ -22,7 +22,7 @@ def generalize(the_geometries, the_generalization_size):
   # the point having the most neighbours -> will fuse with them
   
   
-  return the_geometries_2
+  return the_geometries
 
 def from_one_line_to_several_points(the_geometry, the_generalization_size):
   """
