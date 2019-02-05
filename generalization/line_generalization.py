@@ -1,27 +1,30 @@
+import shapely
+import shapely.geometry
 import geopandas
-import copy
 
 
 # line generalization : from one line to several points, by cutting lines in half
 def generalize(the_geometries, the_generalization_size):
   
-  the_geometries_generalized__as_a_list = []
+  the_geometries['geometry'] = the_geometries['geometry'].apply(from_one_line_to_several_points, args=(the_generalization_size,))
+  return the_geometries
+
+def from_one_line_to_several_points(the_geometry, the_generalization_size):
+  """
+  by cutting lines in half
+  """
+  if the_geometry.geom_type != "LineString":
+      return the_geometry
   
-  for a_geometry in the_geometries.itertuples():
+  the_length = the_geometry.length
+  the_number_of_slices_to_be_done = 0
+  while the_length >= the_generalization_size *0.5
+    the_length = the_length /2.0
+    the_number_of_slices_to_be_done = 2* the_number_of_slices_to_be_done +1
     
-    if a_geometry.geometry.geom_type != "LineString":
-      continue
-    
-    the_length = a_geometry.geometry.length
-    the_number_of_slices_to_be_done = 0
-    while the_length >= the_generalization_size *0.5:
-      the_length = the_length /2.0
-      the_number_of_slices_to_be_done = 2* the_number_of_slices_to_be_done +1
-    for a_slice in range(0, the_number_of_slices_to_be_done +1 +1):
-      the_geometry_as_a_point = copy.copy(a_geometry)
-      the_fraction = a_slice / ( float(the_number_of_slices_to_be_done) +1 )
-      the_geometry_as_a_point['geometry'] = a_geometry.geometry.interpolate(the_fraction, normalized=True)
-      the_geometry_as_a_point['the_position'] = a_slice +1
-      the_geometries_generalized__as_a_list.append(the_geometry_as_a_point)
+  the_points = []
+  for a_slice in range(0, the_number_of_slices_to_be_done +1 +1):
+    the_fraction = a_slice / ( float(the_number_of_slices_to_be_done) +1 )
+    the_points.append(the_geometry.interpolate(the_fraction, normalized=True))
   
-  return geopandas.GeoDataFrame(the_geometries_generalized__as_a_list).reset_index(drop=True)
+  return shapely.geometry.MultiPoint(the_points)
