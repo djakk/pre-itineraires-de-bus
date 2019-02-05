@@ -7,9 +7,8 @@ import pandas
 def generalize(the_geometries, the_generalization_size):
   
   the_geometries['geometry'] = the_geometries['geometry'].apply(from_one_line_to_several_points, args=(the_generalization_size,))
-  the_geometries.geometry.apply(pandas.Series) \
+  return the_geometries.geometry.apply(pandas.Series) \
     .merge(the_geometries, left_index = True, right_index = True)
-  return the_geometries
 
 def from_one_line_to_several_points(the_geometry, the_generalization_size):
   """
