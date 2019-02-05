@@ -15,7 +15,6 @@ def generalize(the_geometries, the_generalization_size):
     .drop("geometry", axis = 1) \
     .melt(id_vars = ['id', 'name', 'highway'], value_name = "geometry") \
     .drop("variable", axis = 1) \
-    .dropna()
   
   print(list(the_geometries_2)) # print columns' name
   print(the_geometries_2)
