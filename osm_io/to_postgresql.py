@@ -27,7 +27,11 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   # (this changes the dtype of all columns to object)
   the_osm_datas_as_records = the_osm_datas.where((pandas.notnull(the_osm_datas)), None).to_dict('records')
   
+  the_counter = 1
   for a_record in the_osm_datas_as_records:
+    
+    if the_counter >= 10000:
+      break
     
     # extract the non-None properties of the record, except id and geometry
     the_record_as_a_copy = dict(a_record)
@@ -49,6 +53,8 @@ INSERT INTO mytable
 VALUES (%(id)s, %(geometry)s, %(properties)s);\
 """, a_record)
     the_cursor.close()
+    
+    the_counter += 1
   
   the_connection.commit()
   the_connection.close()
