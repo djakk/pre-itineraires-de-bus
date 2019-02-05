@@ -11,7 +11,7 @@ def get_data_from_osm():
   """
   put the osm properties in a dict inside a row (instead of a column for each osm property)
   
-  return a geodataframe with only 4 columns : id, type ("way", "node" or "relation"), properties (dictionnary), geometry
+  return a geodataframe with only 4 columns : id, osm_type ("way", "node" or "relation"), properties (dictionnary), geometry
   """
   bbox = shapely.geometry.box(-1.6920,48.1506, -1.6753,48.1594)
   #bbox = shapely.geometry.box(-1.6920,48.1506, -1.6910,48.1516) # very small bbox
@@ -35,7 +35,7 @@ def get_data_from_osm():
   the_roads = the_roads[the_roads.type == 'LineString'].to_crs({'init': 'epsg:5837'}) # 5837 = 900913
   
   # "type" column
-  the_roads["type"] = "way"
+  the_roads["osm_type"] = "way"
   
   #print(the_roads.unary_union) # à afficher dans qgis avec WKT
   return the_roads
