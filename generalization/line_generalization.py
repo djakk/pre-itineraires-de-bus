@@ -13,6 +13,8 @@ def generalize(the_geometries, the_generalization_size):
     .drop("geometry", axis = 1) \
     .melt(id_vars = ['id'], value_name = "geometry") \
     .drop("variable", axis = 1)
+  the_geometries_2 = the_geometries.geometry.apply(pandas.Series)
+  
   print(list(the_geometries_2)) # print columns' name
   print(the_geometries_2)
   return the_geometries_2
