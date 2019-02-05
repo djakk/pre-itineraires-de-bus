@@ -1,5 +1,4 @@
 import shapely
-import shapely.geometry
 import geopandas
 
 
@@ -7,6 +6,8 @@ import geopandas
 def generalize(the_geometries, the_generalization_size):
   
   the_geometries['geometry'] = the_geometries['geometry'].apply(from_one_line_to_several_points, args=(the_generalization_size,))
+  the_geometries.geometry.apply(geopandas.Series) \
+    .merge(the_geometries, left_index = True, right_index = True)
   return the_geometries
 
 def from_one_line_to_several_points(the_geometry, the_generalization_size):
@@ -27,4 +28,4 @@ def from_one_line_to_several_points(the_geometry, the_generalization_size):
     the_fraction = a_slice / ( float(the_number_of_slices_to_be_done) +1 )
     the_points.append(the_geometry.interpolate(the_fraction, normalized=True))
   
-  return shapely.geometry.MultiPoint(the_points)
+  return the_points
