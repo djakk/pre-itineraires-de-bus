@@ -10,7 +10,7 @@ def generalize(the_geometries, the_generalization_size):
   the_geometries.rename(columns = {'geometry': 'geometry_2'}, inplace = True)
   # from list inside a row to several rows, in a pandas' way
   # help : https://mikulskibartosz.name/how-to-split-a-list-inside-a-dataframe-cell-into-rows-in-pandas-9849d8ff2401 : 
-  the_geometries_2 = the_geometries.geometry.apply(pandas.Series) \
+  the_geometries_2 = the_geometries.geometry_2.apply(pandas.Series) \
     .merge(the_geometries, left_index = True, right_index = True) \
     .melt(id_vars = ['id', 'name'], value_name = "geometry") \
     .drop("variable", axis = 1) \
