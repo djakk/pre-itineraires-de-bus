@@ -18,7 +18,7 @@ def from_one_line_to_several_points(the_geometry, the_generalization_size):
   
   the_length = the_geometry.length
   the_number_of_slices_to_be_done = 0
-  while the_length >= the_generalization_size *0.5
+  while the_length >= the_generalization_size *0.5:
     the_length = the_length /2.0
     the_number_of_slices_to_be_done = 2* the_number_of_slices_to_be_done +1
     
