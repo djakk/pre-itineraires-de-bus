@@ -25,6 +25,7 @@ def get_data_from_osm():
   print(the_properties_as_name)
   # this helped : pandas merge columns : https://stackoverflow.com/questions/19377969/combine-two-columns-of-text-in-dataframe-in-pandas-python
   the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda the_row: {a_property_as_name : the_row[a_property_as_name] for a_property_as_name in the_properties_as_name if pandas.notnull(the_row[a_property_as_name])}, axis=1)
+  the_roads.drop(the_properties_as_name, axis=1, inplace=True)
   print("just after '.apply' : ")
   print(list(the_roads))
   print(the_roads)
