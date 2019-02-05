@@ -34,8 +34,8 @@ def get_data_from_osm():
   
   the_roads = the_roads[the_roads.type == 'LineString'].to_crs({'init': 'epsg:5837'}) # 5837 = 900913
   
-  # "type" column
-  the_roads["osm_type"] = "way"
+  # "osm_type" new column
+  the_roads = the_roads.assign(osm_type = "way")
   
   #print(the_roads.unary_union) # à afficher dans qgis avec WKT
   return the_roads
