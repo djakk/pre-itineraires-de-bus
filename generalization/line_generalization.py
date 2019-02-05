@@ -13,7 +13,7 @@ def generalize(the_geometries, the_generalization_size):
   the_geometries_2 = the_geometries.geometry.apply(pandas.Series) \
     .merge(the_geometries, left_index = True, right_index = True) \
     .drop("geometry", axis = 1) \
-    .melt(id_vars = ['id', 'name'], value_name = "geometry") \
+    .melt(id_vars = ['id', 'name', 'highway'], value_name = "geometry") \
     .drop("variable", axis = 1) \
     .dropna()
   
