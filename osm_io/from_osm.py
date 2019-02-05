@@ -12,9 +12,19 @@ def get_data_from_osm():
   bbox = shapely.geometry.box(-1.6920,48.1506, -1.6753,48.1594)
   #bbox = shapely.geometry.box(-1.6920,48.1506, -1.6910,48.1516) # very small bbox
   the_roads = geopandas_osm.osm.query_osm('way', bbox=bbox, recurse='down', tags='highway')
+  print("just after 'geopandas_osm.osm.query_osm' : ")
   print(list(the_roads))
   print(the_roads)
   
+  # put the osm properties in a dict inside a row (instead of a column for each osm property)
+  the_properties_as_name = list(the_roads)
+  the_properties_as_name.remove('id')
+  the_properties_as_name.remove('geometry')
+  the_roads = the_roads.groupby(by=the_properties_as_name, axis=1)
+  print("just after '.groupby' : ")
+  print(list(the_roads))
+  print(the_roads)
+    
   the_roads = the_roads[the_roads.type == 'LineString'][['id', 'highway', 'name', 'geometry']].to_crs({'init': 'epsg:5837'}) # 5837 = 900913
   #print(the_roads.unary_union) # à afficher dans qgis avec WKT
   return the_roads
