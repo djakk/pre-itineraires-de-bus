@@ -30,9 +30,9 @@ def aPrintingFunction(ch, method, properties, body):
 def theCallbackFunction(ch, method, properties, body):
     print(u"inside theCallbackFunction")
     the_datas = osm_io.from_osm.get_data_from_osm()
-    the_datas = generalization.line_generalization.generalize(the_datas, 10)
+    the_datas_2 = generalization.line_generalization.generalize(the_datas, 10)
     # geopandas -> postgresql database
-    osm_io.to_postgresql.save_to_postgresql(the_datas, os.environ.get('DATABASE_URL'))
+    osm_io.to_postgresql.save_to_postgresql(the_datas_2, os.environ.get('DATABASE_URL'))
     # datas are ready inside the postgresql database : send a response back to NodeJS
     the_connection = pika.BlockingConnection(params)
     the_channel = the_connection.channel()
