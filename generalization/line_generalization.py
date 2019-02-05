@@ -8,13 +8,13 @@ def generalize(the_geometries, the_generalization_size):
   
   the_geometries['geometry'] = the_geometries['geometry'].apply(from_one_line_to_several_points, args=(the_generalization_size,))
   # help : https://mikulskibartosz.name/how-to-split-a-list-inside-a-dataframe-cell-into-rows-in-pandas-9849d8ff2401 : 
-  the_geometries_as_points = the_geometries.geometry.apply(pandas.Series) \
+  the_geometries.geometry.apply(pandas.Series) \
     .merge(the_geometries, left_index = True, right_index = True) \
     .melt(id_vars = ['id'], value_name = "geometry") \
     .drop("variable", axis = 1)
-  print(list(the_geometries_as_points)) # print columns' name
-  print(the_geometries_as_points)
-  return the_geometries_as_points
+  print(list(the_geometries)) # print columns' name
+  print(the_geometries)
+  return the_geometries
 
 def from_one_line_to_several_points(the_geometry, the_generalization_size):
   """
