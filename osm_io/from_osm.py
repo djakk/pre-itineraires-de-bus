@@ -28,9 +28,9 @@ def get_data_from_osm():
   #the_roads = the_roads.groupby(by=["id", "geometry"], axis=1, level=0).groups
   # pandas merge columns : https://stackoverflow.com/questions/19377969/combine-two-columns-of-text-in-dataframe-in-pandas-python
   #the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda x: {a_key : a_value for a_key, a_value in zip(the_properties_as_name, x) if not numpy.isnan(a_value)}, axis=1)
-  the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda x: printing_function(x), axis=1)
+  the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda the_row: {a_property_as_name : the_row[a_property_as_name] for a_property_as_name in the_properties_as_name}, axis=1)
   #the_roads['properties'] = the_roads["name"] + the_roads["highway"]
-  print("just after '.groupby' : ")
+  print("just after '.apply' : ")
   print(list(the_roads))
   print(the_roads)
     
@@ -42,6 +42,6 @@ def printing_function(x):
   print("priting_function")
   print(x)
   print(len(x))
-  for i in x:
-    print(i)
+  #for i in x:
+  #  print(i)
   return x
