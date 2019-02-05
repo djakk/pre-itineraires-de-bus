@@ -6,13 +6,13 @@ import pandas
 
 def save_to_postgresql(the_osm_datas, the_url_to_the_database):
   """
-  the_osm_datas : only 4 columns : id (=osm_id), type (=node, way or relation), properties (=dictionary {"highway": "secondary", "name": "blablabla"}), geometry
+  the_osm_datas : only 4 columns : id (=osm_id), osm_type (=node, way or relation), properties (=dictionary {"highway": "secondary", "name": "blablabla"}), geometry
   
   psql $DATABASE_URL -> 
     CREATE EXTENSION postgis;
     CREATE EXTENSION hstore;
     
-    CREATE TABLE "mytable" ("osm_id"  bigint, "type"  text, "properties"  hstore, "geometry"  geometry);
+    CREATE TABLE "mytable" ("osm_id"  bigint, "osm_type"  text, "properties"  hstore, "geometry"  geometry);
   """
   print("inside 'save_to_postgresql'")
   print(the_osm_datas)
@@ -42,8 +42,8 @@ def save_to_postgresql(the_osm_datas, the_url_to_the_database):
     psycopg2.extras.register_hstore(the_cursor)
     the_cursor.execute("""\
 INSERT INTO mytable 
-       ("osm_id", "type", "geometry", "properties") 
-VALUES (%(id)s, %(type)s, %(geometry)s, %(properties)s);\
+       ("osm_id", "osm_type", "geometry", "properties") 
+VALUES (%(id)s, %(osm_type)s, %(geometry)s, %(properties)s);\
 """, a_record)
     the_cursor.close()
     
