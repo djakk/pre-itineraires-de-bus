@@ -20,7 +20,7 @@ def get_data_from_osm():
   the_properties_as_name = list(the_roads)
   the_properties_as_name.remove('id')
   the_properties_as_name.remove('geometry')
-  the_roads = the_roads.groupby(by=the_properties_as_name, axis=1)
+  the_roads = the_roads.groupby(by=the_properties_as_name, axis=1, as_index=False)
   print("just after '.groupby' : ")
   print(list(the_roads))
   print(the_roads)
