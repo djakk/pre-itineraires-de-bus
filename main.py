@@ -31,7 +31,7 @@ def theCallbackFunction(ch, method, properties, body):
     print(u"inside theCallbackFunction")
     
     the_datas = osm_io.from_osm.get_data_from_osm()
-    print("after osm_io.from_osm.get_data_from_osm()" : )
+    print("after osm_io.from_osm.get_data_from_osm() : ")
     print(list(the_datas))
     print(the_datas)
     
