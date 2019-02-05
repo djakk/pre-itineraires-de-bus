@@ -14,21 +14,21 @@ def get_data_from_osm():
   bbox = shapely.geometry.box(-1.6920,48.1506, -1.6753,48.1594)
   #bbox = shapely.geometry.box(-1.6920,48.1506, -1.6910,48.1516) # very small bbox
   the_roads = geopandas_osm.osm.query_osm('way', bbox=bbox, recurse='down', tags='highway')
-  print("just after 'geopandas_osm.osm.query_osm' : ")
-  print(list(the_roads))
-  print(the_roads)
+  #print("just after 'geopandas_osm.osm.query_osm' : ")
+  #print(list(the_roads))
+  #print(the_roads)
   
   # put the osm properties in a dict inside a row (instead of a column for each osm property)
   the_properties_as_name = list(the_roads)
   the_properties_as_name.remove('id')
   the_properties_as_name.remove('geometry')
-  print(the_properties_as_name)
+  #print(the_properties_as_name)
   # this helped : pandas merge columns : https://stackoverflow.com/questions/19377969/combine-two-columns-of-text-in-dataframe-in-pandas-python
   the_roads['properties'] = the_roads[the_properties_as_name].apply(lambda the_row: {a_property_as_name : the_row[a_property_as_name] for a_property_as_name in the_properties_as_name if pandas.notnull(the_row[a_property_as_name])}, axis=1)
   the_roads.drop(the_properties_as_name, axis=1, inplace=True)
-  print("just after '.apply' : ")
-  print(list(the_roads))
-  print(the_roads)
+  #print("just after '.apply' : ")
+  #print(list(the_roads))
+  #print(the_roads)
     
   the_roads = the_roads[the_roads.type == 'LineString'].to_crs({'init': 'epsg:5837'}) # 5837 = 900913
   #print(the_roads.unary_union) # à afficher dans qgis avec WKT
