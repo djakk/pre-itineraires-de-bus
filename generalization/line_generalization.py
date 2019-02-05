@@ -1,12 +1,13 @@
 import shapely
 import geopandas
+import pandas
 
 
 # line generalization : from one line to several points, by cutting lines in half
 def generalize(the_geometries, the_generalization_size):
   
   the_geometries['geometry'] = the_geometries['geometry'].apply(from_one_line_to_several_points, args=(the_generalization_size,))
-  the_geometries.geometry.apply(geopandas.Series) \
+  the_geometries.geometry.apply(pandas.Series) \
     .merge(the_geometries, left_index = True, right_index = True)
   return the_geometries
 
