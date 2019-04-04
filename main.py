@@ -22,13 +22,13 @@ params = pika.URLParameters(url_str)
 
 
 def aPrintingFunction(ch, method, properties, body):
-    print(u"aPrintingFunction has been called !")
+    print("aPrintingFunction has been called !")
     print(properties)
     print(body)
     return
 
 def theCallbackFunction(ch, method, properties, body):
-    print(u"inside theCallbackFunction")
+    print("inside theCallbackFunction")
     
     the_datas = osm_io.from_osm.get_data_from_osm()
     print("after osm_io.from_osm.get_data_from_osm() : ")
@@ -48,19 +48,19 @@ def theCallbackFunction(ch, method, properties, body):
     return
 
 
-print(u"connection …")
+print("connection …")
 connection = pika.BlockingConnection(params) # Connect to CloudAMQP
-print(u"channel …")
+print("channel …")
 channel = connection.channel() # start a channel
 #channel.queue_declare(queue='myQueue') # Declare a queue
 
-print(u"channel.basic_consume …")
+print("channel.basic_consume …")
 channel.basic_consume(theCallbackFunction,
     queue='myQueue2',
     no_ack=False) # no_ack=False <- if 'myQueue2' does not exists, do not sent a 404 error
 
-print(u"channel.start_consuming …")
+print("channel.start_consuming …")
 channel.start_consuming() # start consuming (blocks)
 
-print(u"connection.close …")
+print("connection.close …")
 connection.close()
